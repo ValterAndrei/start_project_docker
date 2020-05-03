@@ -89,13 +89,13 @@ services:
       - db
 ```
 
-7. Criar o projeto
+6. Criar o projeto
 
 ```
 $ sudo docker-compose run --rm web rails new . -T --force --database=postgresql
 ```
 
-10. Configurando o banco de dados `database.yml`
+7. Configurando o banco de dados `database.yml`
 
 ```
 development: &default
@@ -116,14 +116,19 @@ production:
   database: myapp_production
 ```
 
-11. Criando o banco de dados
+8. Criando o banco de dados
 
 ```
-$ docker-compose up -d db
 $ docker-compose run --rm web rails db:create
 ```
 
-12. Acessando banco de dados
+9. Subindo seu servidor
+
+```
+$ docker-compose up web
+```
+
+10. Acessando banco de dados
 
 ```
 $ docker-compose run --rm db psql -h db -U postgres
@@ -133,15 +138,9 @@ Ou:
 $ docker-compose run --rm db psql -d postgres://postgres@db/myapp_development
 ```
 
-13. Subindo seu servidor
+11. Acessar o endereço `localhost:3000`
 
-```
-$ docker-compose up web
-```
-
-14. Acessar o endereço `localhost:3000`
-
-7. Instalando React (opcional)
+12. Instalando React (opcional)
 
 ```
 $ docker-compose run --rm web rails webpacker:install:react
@@ -149,14 +148,14 @@ $ docker-compose run --rm web rails webpacker:install:react
 <%= javascript_pack_tag 'hello_react' %>
 ```
 
-8. Editar a configuração host do webpacker `config/webpacker.yml`
+13. Editar a configuração host do webpacker `config/webpacker.yml`
 
 ```
 dev_server:
   host: 0.0.0.0
 ```
 
-9. Editar o arquivo `config/environments/development.rb`
+14. Editar o arquivo `config/environments/development.rb`
 
 ```
 # Add to whitelist the '172.18.0.1' network space in the Web Console config.
