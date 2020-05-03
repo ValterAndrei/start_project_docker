@@ -10,7 +10,7 @@ $ touch Dockerfile Gemfile Gemfile.lock entrypoint.sh docker-compose.yml
 2. No arquivo **Dockerfile**, insira este conteúdo:
 
 ```
-FROM ruby:2.7.1
+FROM ruby:2.6.3
 RUN curl https://deb.nodesource.com/setup_14.x | bash
 RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
@@ -29,7 +29,6 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
-# Start the main process.
 CMD ["rails", "server", "-b", "0.0.0.0"]
 ```
 
@@ -37,7 +36,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 
 ```
 source 'https://rubygems.org'
-gem 'rails', '~> 6'
+gem 'rails', '6.0.2.2'
 ```
 
 4. No arquivo **entrypoint.sh**, insira este conteúdo:
@@ -93,8 +92,7 @@ services:
 7. Criar o projeto
 
 ```
-$ docker-compose run --rm web rails new . -T --force --database=postgresql
-$ docker-compose build
+$ sudo docker-compose run --rm web rails new . -T --force --database=postgresql
 ```
 
 10. Configurando o banco de dados `database.yml`
@@ -102,7 +100,7 @@ $ docker-compose build
 ```
 development: &default
   adapter: postgresql
-  database: my_app_development
+  database: myapp_development
   encoding: unicode
   host: db
   username: postgres
@@ -111,11 +109,11 @@ development: &default
 
 test:
   <<: *default
-  database: my_app_test
+  database: myapp_test
 
 production:
   <<: *default
-  database: my_app_production
+  database: myapp_production
 ```
 
 11. Criando o banco de dados
@@ -132,7 +130,7 @@ $ docker-compose run --rm db psql -h db -U postgres
 
 Ou:
 
-$ docker-compose run --rm db psql -d postgres://postgres@db/my_app_development
+$ docker-compose run --rm db psql -d postgres://postgres@db/myapp_development
 ```
 
 13. Subindo seu servidor
