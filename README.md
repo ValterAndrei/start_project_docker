@@ -138,9 +138,15 @@ Ou:
 $ docker-compose run --rm db psql -d postgres://postgres@db/myapp_development
 ```
 
-11. Acessar o endereço `localhost:3000`
+11. Trocando propriedade dos arquivos:
 
-12. Instalando React (opcional)
+```
+sudo chown -R $USER:$USER .
+```
+
+12. Acessar o endereço `localhost:3000`
+
+13. Instalando React (opcional)
 
 ```
 $ docker-compose run --rm web rails webpacker:install:react
@@ -148,14 +154,14 @@ $ docker-compose run --rm web rails webpacker:install:react
 <%= javascript_pack_tag 'hello_react' %>
 ```
 
-13. Editar a configuração host do webpacker `config/webpacker.yml`
+14. Editar a configuração host do webpacker `config/webpacker.yml`
 
 ```
 dev_server:
   host: 0.0.0.0
 ```
 
-14. Editar o arquivo `config/environments/development.rb`
+15. Editar o arquivo `config/environments/development.rb`
 
 ```
 # Add to whitelist the '172.18.0.1' network space in the Web Console config.
