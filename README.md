@@ -141,7 +141,7 @@ $ docker-compose run --rm db psql -d postgres://postgres@db/myapp_development
 11. Trocando propriedade dos arquivos:
 
 ```
-sudo chown -R $USER:$USER .
+$ sudo chown -R $USER:$USER .
 ```
 
 12. Acessar o endereço `localhost:3000`
